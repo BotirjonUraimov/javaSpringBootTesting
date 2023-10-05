@@ -16,7 +16,9 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' //added by manual
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'org.postgresql:postgresql' //added by manual
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
