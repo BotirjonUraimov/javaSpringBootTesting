@@ -31,4 +31,13 @@ public class EmployeeService {
         return employeeRepository.findByNameAndLastName(name, lastname);
     }
 
+    public List<Employee> findByParam(String name) {
+        return employeeRepository.findByNameLikeQueryNative(name);
+    }
+
+    public void delete(Long id) {
+        Employee employee = employeeRepository.getReferenceById(id);
+        employeeRepository.delete(employee);
+    }
+
 }
