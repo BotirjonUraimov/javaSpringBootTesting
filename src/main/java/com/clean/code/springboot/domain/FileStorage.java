@@ -15,6 +15,8 @@ public class FileStorage implements Serializable {
     private String hashId;
     private String contentType;
     private String uploadPath;
+
+    @Enumerated(EnumType.STRING)
     private FileStorageStatus fileStorageStatus;
 
     public Long getId() {
