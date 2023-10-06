@@ -42,4 +42,20 @@ public class FileStorageResource {
                 .body(new FileUrlResource(String.format("%s/%s", uploadFolder, fileStorage.getUploadPath())));
     }
 
+    @GetMapping("/download/{hashId}")
+    public ResponseEntity downloadFile(@PathVariable String hashId) throws IOException {
+        FileStorage fileStorage = fileStorageService.findByHashId(hashId);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileName=\"" + URLEncoder.encode(fileStorage.getName()))
+                .contentType(MediaType.parseMediaType(fileStorage.getContentType()))
+                .contentLength(fileStorage.getFileSize())
+                .body(new FileUrlResource(String.format("%s/%s", uploadFolder, fileStorage.getUploadPath())));
+    }
+
+    @DeleteMapping("/delete/{hashId}")
+    public ResponseEntity deleteFile(@PathVariable String hashId) throws IOException {
+        fileStorageService.delete(hashId);
+        return ResponseEntity.ok("File deleted");
+    }
+
 }
