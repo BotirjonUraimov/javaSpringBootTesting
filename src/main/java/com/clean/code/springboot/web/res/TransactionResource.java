@@ -17,13 +17,26 @@ public class TransactionResource {
     }
 
     @GetMapping("/getmsg82")
-    public ResponseEntity getMsg() {
-        return  ResponseEntity.ok(transactionService.getMessage());
+    public ResponseEntity getAll() {
+        return  ResponseEntity.ok(transactionService.getAll());
     }
 
     @PostMapping("/savetransactionto82")
     public ResponseEntity createOnTransactionTo82(@RequestBody Transaction transaction) {
         return ResponseEntity.ok(transactionService.save(transaction).getBody());
     }
+
+    // web service Exchange methods
+    @PostMapping("/create/transaction")
+    public ResponseEntity createTransaction(@RequestBody Transaction transaction) {
+        return ResponseEntity.ok(transactionService.saveTransactionByExchangeMethod(transaction));
+    }
+
+    @PutMapping("/update/transaction")
+    public ResponseEntity updateTransaction(@RequestBody Transaction transaction) {
+        return ResponseEntity.ok(transactionService.updateTransactionByExchangeMethod(transaction));
+    }
+
+
 
 }
